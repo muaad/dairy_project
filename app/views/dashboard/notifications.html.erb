@@ -1,0 +1,20 @@
+<% @deliveries.each do |delivery| %>
+<article class="timeline-item alt">
+    <div class="timeline-desk">
+        <div class="panel">
+            <div class="panel-body">
+                <span class="arrow-o"></span>
+                <span class="timeline-icon green"></span>
+                <span class="timeline-date"><%= delivery.created_at.strftime("%I:%M%p") %></span>
+                <h1 class="green"><%= delivery.created_at.strftime("%d %B") %> | <%= delivery.created_at.strftime("%A") %></h1>
+                <p>
+				<%= link_to("#{delivery.delivered_by} delivered #{delivery.quantity} litres of #{delivery.item_name}", delivery_path(delivery)) %>
+				<span class="badge bg-important">Payment Pending</span><br><br>
+				<span class="badge bg-success"><%= link_to "Make Payment", pay_delivery_path(delivery), method: :post, data: { confirm: 'Are you sure?' } %></span>
+				<!-- #{time_ago_in_words(delivery.created_at)} ago. -->
+			</p>
+            </div>
+        </div>
+    </div>
+</article>
+<% end %>

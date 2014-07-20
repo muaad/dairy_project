@@ -1,0 +1,21 @@
+# == Schema Information
+#
+# Table name: prices
+#
+#  id           :integer          not null, primary key
+#  commodity_id :integer
+#  price        :float
+#  created_at   :datetime
+#  updated_at   :datetime
+#  user_id      :integer
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  commodity_id: 
+  price: 
+
+two:
+  commodity_id: 
+  price: 

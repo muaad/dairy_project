@@ -3,6 +3,7 @@ ruby '2.0.0'
 gem 'rails', '4.1.4'
 gem 'sqlite3'
 gem 'sass-rails', '~> 4.0.3'
+gem 'font-awesome-sass'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.0.0'
 gem 'jquery-rails'
@@ -15,6 +16,9 @@ gem 'devise'
 gem 'devise_invitable'
 gem 'figaro', '>= 1.0.0.rc1'
 gem 'high_voltage'
+gem "paperclip"
+gem 'acts_as_tenant'
+gem 'annotate'
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller', :platforms=>[:mri_20]

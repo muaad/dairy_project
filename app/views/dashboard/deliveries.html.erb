@@ -1,0 +1,143 @@
+<!-- page start-->
+<section class="panel">
+<div class="row">
+    <header class="panel-heading">
+        Deliveries
+        <button class="btn btn-success btn-sm pull-right" data-toggle="modal" data-target="#myModal">
+        Record A Delivery
+      </button>
+    </header>
+</div>
+
+<div class="panel-body">
+      <div class="adv-table">
+          <table cellpadding="0" cellspacing="0" border="0" class="display table table-bordered" id="hidden-table-info">
+              <thead>
+              <tr>
+                  <th>Item</th>
+                  <th>Delivered By</th>
+                  <th class="hidden-phone">Quantity</th>
+                  <th class="hidden-phone">Price Per Unit</th>
+                  <th class="hidden-phone">Total Amount</th>
+                  <th class="hidden-phone">Cleared?</th>
+                  <th class="hidden-phone"></th>
+              </tr>
+              </thead>
+              <tbody>
+              <% if !@deliveries.nil? %>
+                  <% @deliveries.each do |delivery| %>
+                      <tr class="gradeX">
+                          <td>
+                              <%= delivery.item_name %>
+                          </td>
+                          <td>
+                              <%= delivery.delivered_by %>
+                          </td>
+                          <td class="hidden-phone">
+                              <%= delivery.quantity %>
+                          </td>
+                          <td class="center hidden-phone">
+                              <%= delivery.price %>
+                          </td>
+                          <td class="center hidden-phone">
+                              <%= delivery.total %>
+                          </td>
+                          <td class="center hidden-phone">
+                              <%= delivery.paid_for %>
+                          </td>
+                          <td>
+                              <%= link_to 'Edit', edit_delivery_path(delivery) %>
+                          </td>
+                      </tr>
+                  <% end %>
+              <% end %>
+              
+              </tbody>
+          </table>
+
+      </div>
+</div>
+</section>
+<!-- page end-->
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+              <h4 class="modal-title" id="myModalLabel">Record a Delivery</h4>
+            </div>
+            <div class="modal-body">
+              Please fill out the delivery's details:
+              <%= render 'deliveries/form' %>
+            </div>
+            <!-- <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Save changes</button>
+            </div> -->
+          </div>
+        </div>
+      </div>
+
+<script type="text/javascript">
+/* Formating function for row details */
+function fnFormatDetails ( oTable, nTr )
+{
+var aData = oTable.fnGetData( nTr );
+var sOut = '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">';
+sOut += '<tr><td>Rendering engine:</td><td>'+aData[1]+' '+aData[4]+'</td></tr>';
+sOut += '<tr><td>Link to source:</td><td>Could provide a link here</td></tr>';
+sOut += '<tr><td>Extra info:</td><td>And any further details here (images etc)</td></tr>';
+sOut += '</table>';
+
+return sOut;
+}
+
+// $(document).ready(function() {
+//     /*
+//      * Insert a 'details' column to the table
+//      */
+//     var nCloneTh = document.createElement( 'th' );
+//     var nCloneTd = document.createElement( 'td' );
+//     nCloneTd.innerHTML = '<%= image_tag("/assets/details_open.png") %>';
+//     nCloneTd.className = "center";
+
+//     $('#hidden-table-info thead tr').each( function () {
+//         this.insertBefore( nCloneTh, this.childNodes[0] );
+//     } );
+
+//     $('#hidden-table-info tbody tr').each( function () {
+//         this.insertBefore(  nCloneTd.cloneNode( true ), this.childNodes[0] );
+//     } );
+
+//     /*
+//      * Initialse DataTables, with no sorting on the 'details' column
+//      */
+//     var oTable = $('#hidden-table-info').dataTable( {
+//         "aoColumnDefs": [
+//             { "bSortable": false, "aTargets": [ 0 ] }
+//         ],
+//         "aaSorting": [[1, 'asc']]
+//     });
+
+//     /* Add event listener for opening and closing details
+//      * Note that the indicator for showing which row is open is not controlled by DataTables,
+//      * rather it is done here
+//      */
+//     $('#hidden-table-info tbody td img').live('click', function () {
+//         var nTr = $(this).parents('tr')[0];
+//         if ( oTable.fnIsOpen(nTr) )
+//         {
+//             /* This row is already open - close it */
+//             this.src = '<%= image_tag("/assets/details_open.png") %>';
+//             oTable.fnClose( nTr );
+//         }
+//         else
+//         {
+//             /* Open this row */
+//             this.src = '<%= image_tag("/assets/details_close.png") %>';
+//             oTable.fnOpen( nTr, fnFormatDetails(oTable, nTr), 'details' );
+//         }
+//     } );
+// } );
+</script>

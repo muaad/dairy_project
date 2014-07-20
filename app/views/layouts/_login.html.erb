@@ -1,0 +1,49 @@
+<%= form_for(:user, :url => user_session_path, :html => { :role => 'form', class: "form-signin"}) do |f| %>
+  <h2 class="form-signin-heading">sign in now</h2>
+  <%= devise_error_messages! %>
+  <div class="login-wrap">
+  <div class="form-group">
+    <%= f.label :email %>
+    <%= f.email_field :email, :autofocus => true, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :password %>
+    <%= f.password_field :password, class: 'form-control' %>
+  </div>
+    <% if devise_mapping.rememberable? -%>
+      <div class="checkbox">
+        <%= f.check_box :remember_me %> <%= f.label :remember_me %>
+      </div>
+    <% end -%>
+    <%= f.submit 'Sign in', :class => 'btn btn-lg btn-login btn-block' %>
+    <a data-toggle="modal" href="#myModal"> Forgot Password?</a>
+  </div>
+  <div class="registration">
+      Don't have an account yet?
+      <a class="" href="registration.html">
+          Create an account
+      </a>
+  </div>
+<% end %>
+
+<!-- Modal -->
+<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Forgot Password ?</h4>
+            </div>
+            <div class="modal-body">
+                <p>Enter your e-mail address below to reset your password.</p>
+                <input type="text" name="email" placeholder="Email" autocomplete="off" class="form-control placeholder-no-fix">
+
+            </div>
+            <div class="modal-footer">
+                <button data-dismiss="modal" class="btn btn-default" type="button">Cancel</button>
+                <button class="btn btn-success" type="button">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- modal -->

@@ -1,0 +1,43 @@
+<div class="panel panel-success">
+  <div class="panel-heading">
+    <h3 class="panel-title">Please fill out the delivery's details:</h3>
+  </div>
+  <div class="panel-body well">
+    <%= form_for(@delivery) do |f| %>
+      <% if @delivery.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@delivery.errors.count, "error") %> prohibited this delivery from being saved:</h2>
+
+          <ul>
+          <% @delivery.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <div class="field">
+        <%= f.label :commodity_id %><br>
+        <%= collection_select(:commodity, :commodity_id, Commodity.all, :id, :name) %>
+      </div>
+      <div class="field">
+        <%= f.label :farmer_id %><br>
+        <%= collection_select(:farmer, :farmer_id, Farmer.all, :id, :name) %>
+      </div>
+      <div class="field">
+        <%= f.label :quantity %><br>
+        <%= f.number_field :quantity, class: "form-control" %>
+      </div>
+      <div class="field">
+        <%= f.label :price %><br>
+        <%= f.text_field :price, class: "form-control" %>
+      </div>
+      <br>
+    <div class="actions pull-right">
+      <%= f.check_box :paid_for %>
+      <%= f.label :paid_for, "Pay for delivery" %>
+      <%= f.submit 'Save Delivery', :class => 'btn-success btn-sm' %>
+    </div>
+  <% end %>
+  </div>
+</div>

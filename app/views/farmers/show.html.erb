@@ -1,0 +1,30 @@
+<div class="panel panel-success">
+  <div class="panel-heading">
+    <h3 class="panel-title">Delivery</h3>
+  </div>
+  <div class="panel-body well list-group">
+    <p class="list-group-item">
+	  <strong>Name:</strong>
+	  <%= @farmer.name %>
+	</p>
+
+	<p class="list-group-item">
+	  <strong>Phone number:</strong>
+	  <%= @farmer.phone_number %>
+	</p>
+
+	<p class="list-group-item">
+	  <strong>Location:</strong>
+	  <%= @farmer.location %>
+	</p>
+
+	<p class="list-group-item">
+	  <strong>Registration number:</strong>
+	  <%= @farmer.registration_number %>
+	</p>
+	</div>
+</div>
+<div class="panel-footer">
+	<%= link_to 'Edit', edit_farmer_path(@farmer) %> |
+	<%= link_to 'Back', farmers_path %>
+</div>

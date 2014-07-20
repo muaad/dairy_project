@@ -4,17 +4,88 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= content_for?(:title) ? yield(:title) : "Dairy Project" %></title>
     <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Dairy Project" %>">
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => false %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => false %>
     <%= csrf_meta_tags %>
   </head>
   <body>
-    <header>
-      <%= render 'layouts/navigation' %>
+    <header class="header white-bg">
+          <div class="sidebar-toggle-box">
+              <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
+          </div>
+        <!--logo start-->
+        <a href="/" class="logo">Maziwa<span>Pay</span></a>
+        <!--logo end-->
+        <div class="top-nav ">
+            <!--search & user info start-->
+            <ul class="nav pull-right top-menu">
+                <!-- <li>
+                    <input type="text" class="form-control search" placeholder="Search">
+                </li> -->
+                <!-- user login dropdown start-->
+                <li class="dropdown">
+                    <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                      <% if user_signed_in? %>
+                        <%= image_tag current_user.profile_pic.url(:thumb), style: "width: 20px;" %>
+                        <span class="username"><%= current_user.name %></span>
+                        <b class="caret"></b>
+                      <% else %>
+                        Login
+                        <b class="caret"></b>
+                      <% end %>
+                    </a>
+                    <ul class="dropdown-menu extended logout">
+                        <div class="log-arrow-up"></div>
+                        <% if user_signed_in? %>
+                        <li><a href="<%= user_path(current_user) %>"><i class=" fa fa-suitcase"></i>Profile</a></li>
+                        <li><a href="<%= dashboard_index_path %>"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+                        <li><a href="<%= dashboard_notifications_path %>"><i class="fa fa-bell-o"></i> Notification</a></li>
+                        <li>
+                          <i class="fa fa-key" style="color: white; padding-top:5px;"></i>
+                          <%= link_to "Log Out", destroy_user_session_path, :method => :delete %>
+                        </li>
+                        <% else %>
+                          <li>
+                            <%= render 'layouts/login' %>
+                          </li>
+                        <% end %>
+                    </ul>
+                </li>
+                <!-- user login dropdown end -->
+            </ul>
+            <!--search & user info end-->
+        </div>
     </header>
-    <main role="main">
-       <%= render 'layouts/messages' %>
-       <%= yield %>
-    </main>
+    <section id="wrapper">
+      <!-- <section class="wrapper"> -->
+        <main role="main" style="padding-top: 90px; padding-right: 25px; padding-left: 25px;">
+           <%= render 'layouts/messages' %>
+           <%= yield %>
+        </main>
+      <!-- </section> -->
+    </section>
+
+    <script>
+
+      //owl carousel
+
+      $(document).ready(function() {
+          $("#owl-demo").owlCarousel({
+              navigation : true,
+              slideSpeed : 300,
+              paginationSpeed : 400,
+              singleItem : true,
+        autoPlay:true
+
+          });
+      });
+
+      //custom select box
+
+      $(function(){
+          $('select.styled').customSelect();
+      });
+
+  </script>
   </body>
 </html>

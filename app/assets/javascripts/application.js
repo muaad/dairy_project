@@ -12,6 +12,18 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require turbolinks
+// require turbolinks
 //= require bootstrap
-//= require_tree .
+//= require jquery.scrollTo.min
+//= require jquery.dcjqaccordion.2.7
+//= require jquery.nicescroll
+//= require jquery.sparkline
+//= require jquery.dataTables
+//= require jquery.easy-pie-chart
+//= require owl.carousel
+//= require jquery.customSelect.min
+//= require respond.min
+//= require common-scripts
+//= require sparkline-chart
+//= require easy-pie-chart
+//= require count

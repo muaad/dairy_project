@@ -1,0 +1,47 @@
+<div class="panel panel-success">
+  <div class="panel-heading">
+    <h3 class="panel-title">Delivery</h3>
+  </div>
+  <div class="panel-body well list-group">
+    <p class="list-group-item">
+      <strong>Item:</strong>
+      <%= @delivery.item_name %>
+    </p>
+
+    <p class="list-group-item">
+      <strong>Delivered By:</strong>
+      <%= @delivery.delivered_by %>
+    </p>
+
+    <p class="list-group-item">
+      <strong>Quantity:</strong>
+      <%= @delivery.quantity %>
+    </p>
+
+    <p class="list-group-item">
+      <strong>Price:</strong>
+      <%= @delivery.price %>
+    </p>
+
+    <p class="list-group-item">
+      <strong>Total:</strong>
+      <%= @delivery.total %>
+    </p>
+
+    <p class="list-group-item">
+      <strong>Paid for:</strong>
+      <% if @delivery.paid_for %>
+        Yes
+      <% else %>
+        No
+      <% end %>
+    </p>
+  </div>
+  <div class="panel-footer">
+    <%= link_to 'Edit', edit_delivery_path(@delivery) %>
+    <% if !@delivery.paid_for %>
+      <%= link_to "Make Payment", pay_delivery_path(@delivery), method: :post, data: { confirm: 'Are you sure?' }, class: "btn-success btn-sm pull-right text-decoration: none;" %>
+    <% end %>
+  </div>
+</div>
+

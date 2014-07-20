@@ -11,15 +11,82 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140717151135) do
+ActiveRecord::Schema.define(version: 20140720210522) do
+
+  create_table "accounts", force: true do |t|
+    t.string   "email"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "accounts", ["user_id"], name: "index_accounts_on_user_id"
+
+  create_table "commodities", force: true do |t|
+    t.string   "name"
+    t.string   "commodity_type"
+    t.string   "units"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "user_id"
+    t.integer  "account_id"
+  end
+
+  add_index "commodities", ["account_id"], name: "index_commodities_on_account_id"
+  add_index "commodities", ["user_id"], name: "index_commodities_on_user_id"
+
+  create_table "deliveries", force: true do |t|
+    t.integer  "commodity_id"
+    t.integer  "farmer_id"
+    t.integer  "quantity"
+    t.float    "price"
+    t.float    "total"
+    t.boolean  "paid_for"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "user_id"
+    t.integer  "account_id"
+  end
+
+  add_index "deliveries", ["account_id"], name: "index_deliveries_on_account_id"
+  add_index "deliveries", ["commodity_id"], name: "index_deliveries_on_commodity_id"
+  add_index "deliveries", ["farmer_id"], name: "index_deliveries_on_farmer_id"
+  add_index "deliveries", ["user_id"], name: "index_deliveries_on_user_id"
+
+  create_table "farmers", force: true do |t|
+    t.string   "name"
+    t.string   "phone_number"
+    t.string   "location"
+    t.string   "registration_number"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "user_id"
+    t.integer  "account_id"
+  end
+
+  add_index "farmers", ["account_id"], name: "index_farmers_on_account_id"
+  add_index "farmers", ["user_id"], name: "index_farmers_on_user_id"
+
+  create_table "prices", force: true do |t|
+    t.integer  "commodity_id"
+    t.float    "price"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "user_id"
+    t.integer  "account_id"
+  end
+
+  add_index "prices", ["account_id"], name: "index_prices_on_account_id"
+  add_index "prices", ["commodity_id"], name: "index_prices_on_commodity_id"
+  add_index "prices", ["user_id"], name: "index_prices_on_user_id"
 
   create_table "users", force: true do |t|
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: ""
+    t.string   "email",                    default: "", null: false
+    t.string   "encrypted_password",       default: ""
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
+    t.integer  "sign_in_count",            default: 0,  null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
@@ -38,9 +105,16 @@ ActiveRecord::Schema.define(version: 20140717151135) do
     t.integer  "invitation_limit"
     t.integer  "invited_by_id"
     t.string   "invited_by_type"
-    t.integer  "invitations_count",      default: 0
+    t.integer  "invitations_count",        default: 0
+    t.string   "profile_pic_file_name"
+    t.string   "profile_pic_content_type"
+    t.integer  "profile_pic_file_size"
+    t.datetime "profile_pic_updated_at"
+    t.boolean  "is_admin"
+    t.integer  "account_id"
   end
 
+  add_index "users", ["account_id"], name: "index_users_on_account_id"
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["invitation_token"], name: "index_users_on_invitation_token", unique: true
   add_index "users", ["invitations_count"], name: "index_users_on_invitations_count"
