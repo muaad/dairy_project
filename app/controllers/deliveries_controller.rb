@@ -1,3 +1,4 @@
+require 'sms_gateway'
 class DeliveriesController < ApplicationController
   layout "dashboard"
   before_filter :authenticate_user!
@@ -27,8 +28,8 @@ class DeliveriesController < ApplicationController
   # POST /deliveries.json
   def create
     @delivery = Delivery.new(delivery_params)
-    @delivery.commodity_id = params[:commodity][:commodity_id]
-    @delivery.farmer_id = params[:farmer][:farmer_id]
+    @delivery.commodity_id = params[:delivery][:commodity]
+    @delivery.farmer_id = params[:delivery][:farmer]
     @delivery.total = delivery_params[:quantity].to_i * delivery_params[:price].to_i 
     @delivery.user_id = current_user.id
     respond_to do |format|
@@ -40,6 +41,9 @@ class DeliveriesController < ApplicationController
         format.json { render json: @delivery.errors, status: :unprocessable_entity }
       end
     end
+    # gateway = SMSGateway.new
+    # gateway.send(@delivery.farmer.phone_number, "Hi, #{@delivery.delivered_by}. We have taken note of your
+    #   your delivery of #{delivery.quantity} litres of milk and you will be dully compensated. Thanks.")
   end
 
   # PATCH/PUT /deliveries/1

@@ -16,4 +16,8 @@ class Commodity < ActiveRecord::Base
 	has_many :prices
 	# belongs_to :account
 	# acts_as_tenant(:account)
+
+	def latest_price
+		prices.last.price
+	end
 end

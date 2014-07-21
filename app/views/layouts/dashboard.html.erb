@@ -9,7 +9,6 @@
     <link rel="shortcut icon" href="images/favicon.png">
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
     <title><%= content_for?(:title) ? yield(:title) : "Maziwa Pay" %></title>
-    <%= stylesheet_link_tag "font-awesome.min.css", media: "all", "data-turbolinks-track" => false %>
     <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => false %>
     <%= javascript_include_tag "application", "data-turbolinks-track" => false %>
     
@@ -20,6 +19,7 @@
       <script src="js/respond.min.js"></script>
       <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
     <![endif]-->
+    
   </head>
 
   <body>
@@ -234,8 +234,7 @@
                             <li><a href="<%= dashboard_settings_path %>"><i class="fa fa-cog"></i> Settings</a></li>
                             <li><a href="<%= dashboard_notifications_path %>"><i class="fa fa-bell-o"></i> Notification</a></li>
                             <li>
-                                <i class="fa fa-key" style="color: white; padding-top:5px;"></i>
-                                <%= link_to "Log Out", destroy_user_session_path, :method => :delete %>
+                                <a href="<%= destroy_user_session_path %>" data-method="delete"><i class="fa fa-key"></i> Log Out</a>
                             </li>
                         </ul>
                     </li>
