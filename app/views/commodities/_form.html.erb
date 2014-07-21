@@ -1,29 +1,41 @@
-<%= form_for(@commodity) do |f| %>
-  <% if @commodity.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@commodity.errors.count, "error") %> prohibited this commodity from being saved:</h2>
+<div class="panel panel-success">
+  <div class="panel-heading">
+    <h3 class="panel-title">Please fill out the commodity's details:</h3>
+  </div>
+  <div class="panel-body well">
+    <%= form_for(@commodity) do |f| %>
+      <% if @commodity.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@commodity.errors.count, "error") %> prohibited this commodity from being saved:</h2>
 
-      <ul>
-      <% @commodity.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+          <ul>
+          <% @commodity.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+          </ul>
+        </div>
       <% end %>
-      </ul>
-    </div>
-  <% end %>
 
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
+      <div class="field">
+        <%= f.label :name %><br>
+        <%= f.text_field :name, class: "form-control" %>
+      </div>
+      <div class="field">
+        <%= f.label :commodity_type %><br>
+        <%= f.text_field :commodity_type, class: "form-control" %>
+      </div>
+      <div class="field">
+        <%= f.label :units %><br>
+        <%= f.text_field :units, class: "form-control" %>
+      </div>
+      <div class="field">
+        <%= f.label "Price" %><br>
+        <%= f.text_field :commodity_type, name: "price", class: "form-control" %>
+      </div>
+      <br>
+      <div class="actions">
+        <%= f.submit 'Save Commodity', :class => 'btn-success btn-sm' %>
+      </div>
+    <% end %>
   </div>
-  <div class="field">
-    <%= f.label :commodity_type %><br>
-    <%= f.text_field :commodity_type %>
-  </div>
-  <div class="field">
-    <%= f.label :units %><br>
-    <%= f.text_field :units %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+</div>

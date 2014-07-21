@@ -1,25 +1,33 @@
-<%= form_for(@price) do |f| %>
-  <% if @price.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@price.errors.count, "error") %> prohibited this price from being saved:</h2>
+<div class="panel panel-success">
+  <div class="panel-heading">
+    <h3 class="panel-title">Set the price:</h3>
+  </div>
+  <div class="panel-body well">
+    <%= form_for(@price) do |f| %>
+      <% if @price.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@price.errors.count, "error") %> prohibited this price from being saved:</h2>
 
-      <ul>
-      <% @price.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+          <ul>
+          <% @price.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+          </ul>
+        </div>
       <% end %>
-      </ul>
-    </div>
-  <% end %>
 
-  <div class="field">
-    <%= f.label :commodity_id %><br>
-    <%= f.text_field :commodity_id %>
+      <div class="field">
+        <%= f.label :commodity_id %><br>
+        <%= f.collection_select :commodity, Commodity.all, :id, :name, {prompt: "Select a commodity"}, {class: "form-control"} %>
+      </div>
+      <div class="field">
+        <%= f.label :price %><br>
+        <%= f.text_field :price, class: "form-control" %>
+      </div>
+      <br>
+      <div class="actions">
+        <%= f.submit 'Update Price', :class => 'btn-success btn-sm' %>
+      </div>
+    <% end %>
   </div>
-  <div class="field">
-    <%= f.label :price %><br>
-    <%= f.text_field :price %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+</div>

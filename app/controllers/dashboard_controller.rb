@@ -23,6 +23,9 @@ class DashboardController < ApplicationController
   end
 
   def settings
+    @commodity = Commodity.new
+    @commodities = Commodity.all
+    @price = Price.new
   end
 
   def reports

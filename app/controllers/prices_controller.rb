@@ -26,11 +26,12 @@ class PricesController < ApplicationController
   # POST /prices.json
   def create
     @price = Price.new(price_params)
+    @price.commodity_id = params[:price][:commodity]
     @price.user_id = current_user.id
 
     respond_to do |format|
       if @price.save
-        format.html { redirect_to @price, notice: 'Price was successfully created.' }
+        format.html { redirect_to dashboard_settings_path, notice: 'Price was successfully updated.' }
         format.json { render :show, status: :created, location: @price }
       else
         format.html { render :new }

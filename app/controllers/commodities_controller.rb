@@ -1,4 +1,5 @@
 class CommoditiesController < ApplicationController
+  layout "dashboard"
   before_action :set_commodity, only: [:show, :edit, :update, :destroy]
   before_filter :authenticate_user!
 
@@ -30,7 +31,8 @@ class CommoditiesController < ApplicationController
 
     respond_to do |format|
       if @commodity.save
-        format.html { redirect_to @commodity, notice: 'Commodity was successfully created.' }
+        Price.create! commodity_id: @commodity.id, price: params[:price], user_id: current_user.id
+        format.html { redirect_to dashboard_settings_path, notice: 'Commodity was successfully created.' }
         format.json { render :show, status: :created, location: @commodity }
       else
         format.html { render :new }
