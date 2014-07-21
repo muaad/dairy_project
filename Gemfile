@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 ruby '2.0.0'
 gem 'rails', '4.1.4'
-gem 'sqlite3'
+# gem 'sqlite3'
 gem 'sass-rails', '~> 4.0.3'
 gem 'font-awesome-sass'
 gem 'uglifier', '>= 1.3.0'
@@ -20,6 +20,7 @@ gem "paperclip"
 gem 'acts_as_tenant'
 gem 'annotate'
 group :development do
+  gem 'sqlite3'
   gem 'better_errors'
   gem 'binding_of_caller', :platforms=>[:mri_20]
   gem 'hub', :require=>nil
@@ -29,4 +30,9 @@ end
 group :development, :test do
   gem 'pry-rails'
   gem 'pry-rescue'
+end
+
+group :production do
+	gem 'rails_12factor'
+	gem 'pg'
 end
