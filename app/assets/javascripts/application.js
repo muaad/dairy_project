@@ -27,3 +27,14 @@
 //= require sparkline-chart
 //= require easy-pie-chart
 //= require count
+//= require all-chartjs
+//= require hover-dropdown
+//= require jquery.flexslider
+//= require jquery.bxslider
+//= require jquery.parallax-1.1.3
+// require jquery.easing.min
+//= require link-hover
+//= require jquery.fancybox.pack
+//= require jquery.themepunch.plugins.min
+//= require jquery.themepunch.revolution.min
+//= require revulation-slide

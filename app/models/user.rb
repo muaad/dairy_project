@@ -48,4 +48,32 @@ class User < ActiveRecord::Base
   has_many :deliveries
   has_many :commodities
   has_many :prices
+  has_many :payments
+
+  def farmers_registered
+    farmers.count
+  end
+
+  def deliveries_recorded
+    deliveries.count
+  end
+  
+  def payments_authorized
+    payments.pluck("amount").inject(:+)
+  end
+
+  def activities
+    # {
+    #   "farmers" => farmers,
+    #   "deliveries" => deliveries,
+    # }
+    activities = {}
+    farmers.each do |farmer|
+      activities["farmers"] = {farmer.name => farmer}
+    end
+    deliveries.each do |delivery|
+      activities["deliveries"] = {delivery.id => delivery}
+    end
+    activities
+  end
 end

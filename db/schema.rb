@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140720210522) do
+ActiveRecord::Schema.define(version: 20140722213725) do
 
   create_table "accounts", force: true do |t|
     t.string   "email"
@@ -66,6 +66,20 @@ ActiveRecord::Schema.define(version: 20140720210522) do
 
   add_index "farmers", ["account_id"], name: "index_farmers_on_account_id"
   add_index "farmers", ["user_id"], name: "index_farmers_on_user_id"
+
+  create_table "payments", force: true do |t|
+    t.float    "amount"
+    t.integer  "farmer_id"
+    t.integer  "delivery_id"
+    t.integer  "user_id"
+    t.string   "transaction_number"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "payments", ["delivery_id"], name: "index_payments_on_delivery_id"
+  add_index "payments", ["farmer_id"], name: "index_payments_on_farmer_id"
+  add_index "payments", ["user_id"], name: "index_payments_on_user_id"
 
   create_table "prices", force: true do |t|
     t.integer  "commodity_id"

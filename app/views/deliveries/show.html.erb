@@ -20,7 +20,7 @@
 
     <p class="list-group-item">
       <strong>Price:</strong>
-      <%= @delivery.price %>
+      <%= @delivery.commodity.latest_price %>
     </p>
 
     <p class="list-group-item">
@@ -39,7 +39,7 @@
   </div>
   <div class="panel-footer">
     <%= link_to 'Edit', edit_delivery_path(@delivery) %>
-    <% if !@delivery.paid_for %>
+    <% if !@delivery.paid_for && current_user.is_admin %>
       <%= link_to "Make Payment", pay_delivery_path(@delivery), method: :post, data: { confirm: 'Are you sure?' }, class: "btn-success btn-sm pull-right text-decoration: none;" %>
     <% end %>
   </div>

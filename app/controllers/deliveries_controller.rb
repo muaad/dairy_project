@@ -30,10 +30,15 @@ class DeliveriesController < ApplicationController
     @delivery = Delivery.new(delivery_params)
     @delivery.commodity_id = params[:delivery][:commodity]
     @delivery.farmer_id = params[:delivery][:farmer]
-    @delivery.total = delivery_params[:quantity].to_i * delivery_params[:price].to_i 
+    @delivery.price = Commodity.find(@delivery.commodity_id).latest_price
+    @delivery.total = delivery_params[:quantity].to_i * @delivery.price
     @delivery.user_id = current_user.id
+
     respond_to do |format|
       if @delivery.save
+        if @delivery.paid_for
+          Payment.create! amount: @delivery.total, delivery_id: @delivery.id, farmer_id: @delivery.farmer_id, user_id: current_user.id
+        end
         format.html { redirect_to @delivery, notice: 'Delivery was successfully created.' }
         format.json { render :show, status: :created, location: @delivery }
       else
@@ -72,9 +77,14 @@ class DeliveriesController < ApplicationController
 
   def make_payment
     @delivery = Delivery.find(params[:id])
-    @delivery.paid_for = true
-    @delivery.save!
-    redirect_to @delivery, notice: "Payment has been made!"
+    if current_user.is_admin
+      @delivery.paid_for = true
+      @delivery.save!
+      Payment.create! amount: @delivery.total, delivery_id: @delivery.id, farmer_id: @delivery.farmer_id, user_id: current_user.id
+      redirect_to @delivery, notice: "Payment has been made!"
+    else
+      redirect_to @delivery, alert: "You are not authorized to make payments!"
+    end
   end
 
   private

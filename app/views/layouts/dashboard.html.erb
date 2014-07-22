@@ -10,6 +10,7 @@
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
     <title><%= content_for?(:title) ? yield(:title) : "Maziwa Pay" %></title>
     <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => false %>
+    <%= javascript_include_tag "//www.google.com/jsapi", "chartkick" %>
     <%= javascript_include_tag "application", "data-turbolinks-track" => false %>
     
     <%= csrf_meta_tags %>
@@ -268,7 +269,7 @@
 
                   <li class="sub-menu">
                       <a href="<%= deliveries_path %>" >
-                          <i class="fa fa-money"></i>
+                          <i class="fa fa-shopping-cart"></i>
                           <span>Deliveries</span>
                       </a>
                   </li>
@@ -287,9 +288,15 @@
                       </a>
                   </li>
                   <li class="sub-menu">
-                      <a href="<%= dashboard_users_path %>" >
+                      <a href="<%= users_path %>" >
                           <i class="fa fa-group"></i>
                           <span>Users</span>
+                      </a>
+                  </li>
+                  <li class="sub-menu">
+                      <a href="<%= payments_path %>" >
+                          <i class="fa fa-money"></i>
+                          <span>Payments</span>
                       </a>
                   </li>
                   

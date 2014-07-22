@@ -17,6 +17,7 @@
 class Delivery < ActiveRecord::Base
   belongs_to :commodity
   belongs_to :farmer
+  has_one :payment
   # belongs_to :account
   # acts_as_tenant(:account)
 
@@ -26,5 +27,9 @@ class Delivery < ActiveRecord::Base
 
   def item_name
   	self.commodity.name
+  end
+
+  def description
+    "#{quantity} #{commodity.units} of #{item_name} by #{delivered_by}"
   end
 end

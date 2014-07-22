@@ -30,12 +30,16 @@ class PricesController < ApplicationController
     @price.user_id = current_user.id
 
     respond_to do |format|
-      if @price.save
-        format.html { redirect_to dashboard_settings_path, notice: 'Price was successfully updated.' }
-        format.json { render :show, status: :created, location: @price }
+      if current_user.is_admin
+        if @price.save
+          format.html { redirect_to dashboard_settings_path, notice: 'Price was successfully updated.' }
+          format.json { render :show, status: :created, location: @price }
+        else
+          format.html { render :new }
+          format.json { render json: @price.errors, status: :unprocessable_entity }
+        end
       else
-        format.html { render :new }
-        format.json { render json: @price.errors, status: :unprocessable_entity }
+        format.html { redirect_to dashboard_settings_path, alert: 'You are not authorized to update the price!' }
       end
     end
   end

@@ -19,6 +19,10 @@ gem 'high_voltage'
 gem "paperclip"
 gem 'acts_as_tenant'
 gem 'annotate'
+gem 'httparty'
+# gem "chartkick"
+gem 'lazy_high_charts'
+gem "highcharts-rails", "~> 3.0.0"
 group :development do
   gem 'sqlite3'
   gem 'better_errors'

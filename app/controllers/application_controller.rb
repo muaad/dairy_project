@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
   before_filter :configure_permitted_parameters, if: :devise_controller?
-  helper_method :resource_name, :resource, :devise_mapping
+  helper_method :resource_name, :resource, :devise_mapping, :deliveries_per_month
 
   # set_current_tenant_through_filter
 	# before_filter :filter_tenant_via_devise_or_params
@@ -52,6 +52,16 @@ class ApplicationController < ActionController::Base
    @devise_mapping ||= Devise.mappings[:user]
   end
 
+  def deliveries_per_month
+  	# delivery = Delivery.where("created_at > ? AND created_at < ?", Time.now.beginning_of_month, Time.now.end_of_month)
+  	# delivery.pluck("quantity").inject(:+)
+  	
+  end
+
+  def price_trends
+  	
+  end
+
 
 	def configure_permitted_parameters
 	  devise_parameter_sanitizer.for(:sign_up) { |u| 
@@ -59,6 +69,7 @@ class ApplicationController < ActionController::Base
 	  }
 	  devise_parameter_sanitizer.for(:account_update) << :name
 	  devise_parameter_sanitizer.for(:account_update) << :profile_pic
+	  devise_parameter_sanitizer.for(:account_update) << :is_admin
 	end
 
 	def generate_unique_registration_number

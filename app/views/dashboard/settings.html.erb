@@ -23,7 +23,13 @@
     </div>
     <div id="collapseTwo" class="panel-collapse collapse">
       <div class="panel-body">
-        <%= render 'prices/form' %>
+        <% if current_user.is_admin %>
+          <%= render 'prices/form' %>
+        <% else %>
+          <div class="alert alert-danger" role="alert">
+            You are not authorized to update the prices!
+          </div>
+        <% end %>
       </div>
     </div>
   </div>

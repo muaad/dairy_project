@@ -1,3 +1,129 @@
-<h3>User</h3>
-<p>Name: <%= @user.name if @user.name %></p>
-<p>Email: <%= @user.email if @user.email %></p>
+<div class="row">
+                  <aside class="profile-nav col-lg-3">
+                      <section class="panel">
+                          <div class="user-heading round">
+                              <a href="#">
+                                  <%= image_tag current_user.profile_pic.url %>
+                              </a>
+                              <h1><%= @user.name %></h1>
+                              <p><%= @user.email %></p>
+                          </div>
+
+                          <ul class="nav nav-pills nav-stacked">
+                              <li><a href="<%= edit_user_registration_path %>"> <i class="fa fa-edit"></i> Edit profile</a></li>
+                          </ul>
+
+                      </section>
+                  </aside>
+                  <section class="panel">
+                          <header class="panel-heading summary-head">
+                          	<i class="fa fa-calendar"></i>
+                              <h4>Recent Activity</h4>
+                          </header>
+                          <div class="panel-body">
+                          	<center>
+                              <ul class="summary-list">
+                                  <li>
+                                      <a href="javascript:;">
+                                        <i class=" fa fa-user text-primary"></i>
+                                          <%= "#{@user.farmers_registered} Farmers Registered" %>
+                                      </a>
+                                  </li>
+                                  <!-- <li>
+                                      <a href="javascript:;">
+                                          <i class="fa fa-envelope text-info"></i>
+                                          15 Emails
+                                      </a>
+                                  </li> -->
+                                  <li>
+                                      <a href="javascript:;">
+                                          <i class=" fa fa-money text-muted"></i>
+                                          <%= @user.payments_authorized %><br>
+                                          Payments Authorized
+                                      </a>
+                                  </li>
+                                  <li>
+                                      <a href="javascript:;">
+                                          <i class="fa fa-tags text-success"></i>
+                                          <%= "#{@user.deliveries_recorded} Deliveries Recorded" %>
+                                      </a>
+                                  </li>
+                                  <!-- <li>
+                                      <a href="javascript:;">
+                                          <i class="fa fa-microphone text-danger"></i>
+                                          4 Audio
+                                      </a>
+                                  </li> -->
+                              </ul>
+                             </center>
+                          </div>
+                      </section>
+                  <section class="panel">
+                          <div class="panel-body profile-activity">
+                              <h5 class="pull-right">12 August 2013</h5>
+                              <div class="activity terques">
+                                  <span>
+                                      <i class="fa fa-shopping-cart"></i>
+                                  </span>
+                                  
+                                  <div class="activity-desk">
+                                      <div class="panel">
+                                          <div class="panel-body">
+                                              <div class="arrow"></div>
+                                              <i class=" fa fa-time"></i>
+                                              <h4>10:45 AM</h4>
+                                              <p>Purchased new equipments for zonal office setup and stationaries.</p>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                              <div class="activity alt purple">
+                                  <span>
+                                      <i class="fa fa-rocket"></i>
+                                  </span>
+                                  <div class="activity-desk">
+                                      <div class="panel">
+                                          <div class="panel-body">
+                                              <div class="arrow-alt"></div>
+                                              <i class=" fa fa-time"></i>
+                                              <h4>12:30 AM</h4>
+                                              <p>Lorem ipsum dolor sit amet consiquest dio</p>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                              <div class="activity blue">
+                                  <span>
+                                      <i class="fa fa-bullhorn"></i>
+                                  </span>
+                                  <div class="activity-desk">
+                                      <div class="panel">
+                                          <div class="panel-body">
+                                              <div class="arrow"></div>
+                                              <i class=" fa fa-time"></i>
+                                              <h4>10:45 AM</h4>
+                                              <p>Please note which location you will consider, or both. Reporting to the VP <br> of Compliance and CSR, you will be responsible for managing.. </p>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+
+                              <div class="activity alt green">
+                                  <span>
+                                      <i class="fa fa-beer"></i>
+                                  </span>
+                                  <div class="activity-desk">
+                                      <div class="panel">
+                                          <div class="panel-body">
+                                              <div class="arrow-alt"></div>
+                                              <i class=" fa fa-time"></i>
+                                              <h4>12:30 AM</h4>
+                                              <p>Please note which location you will consider, or both.</p>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+
+                          </div>
+                      </section>
+              </div>

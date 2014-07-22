@@ -34,8 +34,10 @@
       </div>
       <br>
     <div class="actions pull-right">
-      <%= f.check_box :paid_for %>
-      <%= f.label :paid_for, "Pay for delivery" %>
+      <% if current_user.is_admin %>
+        <%= f.check_box :paid_for %>
+        <%= f.label :paid_for, "Pay for delivery" %>
+      <% end %>
       <%= f.submit 'Save Delivery', :class => 'btn-success btn-sm' %>
     </div>
   <% end %>

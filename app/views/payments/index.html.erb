@@ -1,0 +1,132 @@
+<div class="panel-group" id="accordion">
+  <div class="panel panel-success">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+          Payments made
+        </a>
+      </h4>
+    </div>
+    <div id="collapseOne" class="panel-collapse collapse in">
+      <div class="panel-body">
+        <section class="panel">
+
+        <div class="panel-body">
+              <div class="adv-table">
+                  <table cellpadding="0" cellspacing="0" border="0" class="display table table-bordered" id="hidden-table-info" class="display table table-bordered table-striped">
+                      <thead>
+                      <tr>
+                          <th>Farmer</th>
+                          <th>Delivery</th>
+                          <th class="hidden-phone">Amount</th>
+                          <th class="hidden-phone">Authorized By</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <% if !@payments.nil? %>
+                          <% @payments.each do |payment| %>
+                              <tr class="gradeX">
+                                  <td>
+                                      <%= link_to payment.farmer.name, farmer_path(payment.farmer) %>
+                                  </td>
+                                  <td>
+                                      <%= link_to payment.delivery.description, delivery_path(payment.delivery) %>
+                                  </td>
+                                  <td class="hidden-phone">
+                                      <%= payment.amount %>
+                                  </td>
+                                  <td class="center hidden-phone">
+                                      <%= link_to payment.user.name, user_path(payment.user) %>
+                                  </td>
+                              </tr>
+                          <% end %>
+                      <% end %>
+                      
+                      </tbody>
+                  </table>
+
+              </div>
+        </div>
+        </section>
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-success">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+          Payments pending
+        </a>
+      </h4>
+    </div>
+    <div id="collapseTwo" class="panel-collapse collapse">
+      <div class="panel-body">
+        <%= render 'payments/pending' %>
+      </div>
+    </div>
+  </div>
+  
+</div>
+
+<script type="text/javascript">
+/* Formating function for row details */
+function fnFormatDetails ( oTable, nTr )
+{
+var aData = oTable.fnGetData( nTr );
+var sOut = '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">';
+sOut += '<tr><td>Rendering engine:</td><td>'+aData[1]+' '+aData[4]+'</td></tr>';
+sOut += '<tr><td>Link to source:</td><td>Could provide a link here</td></tr>';
+sOut += '<tr><td>Extra info:</td><td>And any further details here (images etc)</td></tr>';
+sOut += '</table>';
+
+return sOut;
+}
+
+$(document).ready(function() {
+    /*
+     * Insert a 'details' column to the table
+     */
+    // var nCloneTh = document.createElement( 'th' );
+    // var nCloneTd = document.createElement( 'td' );
+    // nCloneTd.innerHTML = '<%= image_tag("/assets/details_open.png") %>';
+    // nCloneTd.className = "center";
+
+    // $('#hidden-table-info thead tr').each( function () {
+    //     this.insertBefore( nCloneTh, this.childNodes[0] );
+    // } );
+
+    // $('#hidden-table-info tbody tr').each( function () {
+    //     this.insertBefore(  nCloneTd.cloneNode( true ), this.childNodes[0] );
+    // } );
+
+    /*
+     * Initialse DataTables, with no sorting on the 'details' column
+     */
+    var oTable = $('#hidden-table-info').dataTable( {
+        "aoColumnDefs": [
+            { "bSortable": false, "aTargets": [ 0 ] }
+        ],
+        "aaSorting": [[1, 'asc']]
+    });
+
+    /* Add event listener for opening and closing details
+     * Note that the indicator for showing which row is open is not controlled by DataTables,
+     * rather it is done here
+     */
+    // $('#hidden-table-info tbody td img').live('click', function () {
+    //     var nTr = $(this).parents('tr')[0];
+    //     if ( oTable.fnIsOpen(nTr) )
+    //     {
+    //         /* This row is already open - close it */
+    //         this.src = '<%= image_tag("/assets/details_open.png") %>';
+    //         oTable.fnClose( nTr );
+    //     }
+    //     else
+    //     {
+    //         /* Open this row */
+    //         this.src = '<%= image_tag("/assets/details_close.png") %>';
+    //         oTable.fnOpen( nTr, fnFormatDetails(oTable, nTr), 'details' );
+    //     }
+    // } );
+} );
+</script>
