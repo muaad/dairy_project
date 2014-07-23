@@ -3,7 +3,7 @@
                       <section class="panel">
                           <div class="user-heading round">
                               <a href="#">
-                                  <%= image_tag current_user.profile_pic.url %>
+                                  <%= image_tag @user.profile_pic.url %>
                               </a>
                               <h1><%= @user.name %></h1>
                               <p><%= @user.email %></p>

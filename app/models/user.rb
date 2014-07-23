@@ -44,11 +44,12 @@ class User < ActiveRecord::Base
   # acts_as_tenant(:account)
   # has_attached_file :profile_pic, :default_url => "/assets/eu.png"
   if Rails.env.production?
-    has_attached_file :profile_pic, :styles => { :medium => "300x300>", :thumb => "10X10>" }, :default_url => "/images/:style/missing.png",
+    has_attached_file :profile_pic,
     :storage => :dropbox,
     :dropbox_credentials => Rails.root.join("config/dropbox.yml")
+  else
+    has_attached_file :profile_pic, :styles => { :medium => "300x300>", :thumb => "10X10>" }, :default_url => "assets/avatar.png"
   end
-  has_attached_file :profile_pic, :styles => { :medium => "300x300>", :thumb => "10X10>" }, :default_url => "/images/:style/missing.png"
   has_many :farmers
   has_many :deliveries
   has_many :commodities
