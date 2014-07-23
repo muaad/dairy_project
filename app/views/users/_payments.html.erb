@@ -1,15 +1,4 @@
-<div class="panel-group" id="accordion">
-  <div class="panel panel-success">
-    <div class="panel-heading">
-      <h4 class="panel-title">
-        <a data-toggle="collapse" data-parent="#accordion" href="#paymentMade">
-          Payments made
-        </a>
-      </h4>
-    </div>
-    <div id="paymentMade" class="panel-collapse collapse in">
-      <div class="panel-body">
-        <section class="panel">
+<section class="panel">
 
         <div class="panel-body">
               <div class="adv-table">
@@ -48,23 +37,3 @@
               </div>
         </div>
         </section>
-      </div>
-    </div>
-  </div>
-  <div class="panel panel-success">
-    <div class="panel-heading">
-      <h4 class="panel-title">
-        <a data-toggle="collapse" data-parent="#accordion" href="#pendingPayment">
-          Payments pending
-        </a>
-      </h4>
-    </div>
-    <div id="pendingPayment" class="panel-collapse collapse">
-      <div class="panel-body">
-        <%= render 'payments/pending' %>
-      </div>
-    </div>
-  </div>
-  
-</div>
-

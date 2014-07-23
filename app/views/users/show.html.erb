@@ -14,116 +14,114 @@
                           </ul>
 
                       </section>
-                  </aside>
-                  <section class="panel">
-                          <header class="panel-heading summary-head">
-                          	<i class="fa fa-calendar"></i>
-                              <h4>Recent Activity</h4>
-                          </header>
-                          <div class="panel-body">
-                          	<center>
-                              <ul class="summary-list">
-                                  <li>
-                                      <a href="javascript:;">
-                                        <i class=" fa fa-user text-primary"></i>
-                                          <%= "#{@user.farmers_registered} Farmers Registered" %>
-                                      </a>
-                                  </li>
-                                  <!-- <li>
-                                      <a href="javascript:;">
-                                          <i class="fa fa-envelope text-info"></i>
-                                          15 Emails
-                                      </a>
-                                  </li> -->
-                                  <li>
-                                      <a href="javascript:;">
-                                          <i class=" fa fa-money text-muted"></i>
-                                          <%= @user.payments_authorized %><br>
-                                          Payments Authorized
-                                      </a>
-                                  </li>
-                                  <li>
-                                      <a href="javascript:;">
-                                          <i class="fa fa-tags text-success"></i>
-                                          <%= "#{@user.deliveries_recorded} Deliveries Recorded" %>
-                                      </a>
-                                  </li>
-                                  <!-- <li>
-                                      <a href="javascript:;">
-                                          <i class="fa fa-microphone text-danger"></i>
-                                          4 Audio
-                                      </a>
-                                  </li> -->
-                              </ul>
-                             </center>
-                          </div>
-                      </section>
-                  <section class="panel">
-                          <div class="panel-body profile-activity">
-                              <h5 class="pull-right">12 August 2013</h5>
-                              <div class="activity terques">
-                                  <span>
-                                      <i class="fa fa-shopping-cart"></i>
-                                  </span>
-                                  
-                                  <div class="activity-desk">
-                                      <div class="panel">
-                                          <div class="panel-body">
-                                              <div class="arrow"></div>
-                                              <i class=" fa fa-time"></i>
-                                              <h4>10:45 AM</h4>
-                                              <p>Purchased new equipments for zonal office setup and stationaries.</p>
-                                          </div>
-                                      </div>
-                                  </div>
-                              </div>
-                              <div class="activity alt purple">
-                                  <span>
-                                      <i class="fa fa-rocket"></i>
-                                  </span>
-                                  <div class="activity-desk">
-                                      <div class="panel">
-                                          <div class="panel-body">
-                                              <div class="arrow-alt"></div>
-                                              <i class=" fa fa-time"></i>
-                                              <h4>12:30 AM</h4>
-                                              <p>Lorem ipsum dolor sit amet consiquest dio</p>
-                                          </div>
-                                      </div>
-                                  </div>
-                              </div>
-                              <div class="activity blue">
-                                  <span>
-                                      <i class="fa fa-bullhorn"></i>
-                                  </span>
-                                  <div class="activity-desk">
-                                      <div class="panel">
-                                          <div class="panel-body">
-                                              <div class="arrow"></div>
-                                              <i class=" fa fa-time"></i>
-                                              <h4>10:45 AM</h4>
-                                              <p>Please note which location you will consider, or both. Reporting to the VP <br> of Compliance and CSR, you will be responsible for managing.. </p>
-                                          </div>
-                                      </div>
-                                  </div>
-                              </div>
-
-                              <div class="activity alt green">
-                                  <span>
-                                      <i class="fa fa-beer"></i>
-                                  </span>
-                                  <div class="activity-desk">
-                                      <div class="panel">
-                                          <div class="panel-body">
-                                              <div class="arrow-alt"></div>
-                                              <i class=" fa fa-time"></i>
-                                              <h4>12:30 AM</h4>
-                                              <p>Please note which location you will consider, or both.</p>
-                                          </div>
-                                      </div>
-                                  </div>
-                              </div>
-
-                          </div>
-                      </section>
+                
+              <div class="panel-group" id="accordion">
+                <div class="panel panel-success">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                      	Deliveries Recorded
+                        <span class="badge"><%= @user.deliveries_recorded %></span>
+                      </a>
+                    </h4>
+                  </div>
+                  <div id="collapseOne" class="panel-collapse collapse in">
+                    <div class="panel-body">
+                      <%= render 'users/deliveries' %>
+                    </div>
+                  </div>
+                </div>
+                <div class="panel panel-success">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+                        Farmers Registered
+                        <span class="badge"><%= @user.farmers_registered %></span>
+                      </a>
+                    </h4>
+                  </div>
+                  <div id="collapseTwo" class="panel-collapse collapse">
+                    <div class="panel-body">
+                      <%= render 'users/farmers' %>
+                    </div>
+                  </div>
+                </div>
+                <div class="panel panel-success">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+                        Payments Authorized
+                        <span class="badge"><%= @user.payments_authorized %></span>
+                      </a>
+                    </h4>
+                  </div>
+                  <div id="collapseThree" class="panel-collapse collapse">
+                    <div class="panel-body">
+                      <%= render 'users/payments' %>
+                    </div>
+                  </div>
+                </div>
               </div>
+
+              <script type="text/javascript">
+              /* Formating function for row details */
+              function fnFormatDetails ( oTable, nTr )
+              {
+              var aData = oTable.fnGetData( nTr );
+              var sOut = '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">';
+              sOut += '<tr><td>Rendering engine:</td><td>'+aData[1]+' '+aData[4]+'</td></tr>';
+              sOut += '<tr><td>Link to source:</td><td>Could provide a link here</td></tr>';
+              sOut += '<tr><td>Extra info:</td><td>And any further details here (images etc)</td></tr>';
+              sOut += '</table>';
+
+              return sOut;
+              }
+
+                  $(document).ready(function() {
+                      /*
+                       * Insert a 'details' column to the table
+                       */
+                      // var nCloneTh = document.createElement( 'th' );
+                      // var nCloneTd = document.createElement( 'td' );
+                      // nCloneTd.innerHTML = '<%= image_tag("/assets/details_open.png") %>';
+                      // nCloneTd.className = "center";
+
+                      // $('#hidden-table-info thead tr').each( function () {
+                      //     this.insertBefore( nCloneTh, this.childNodes[0] );
+                      // } );
+
+                      // $('#hidden-table-info tbody tr').each( function () {
+                      //     this.insertBefore(  nCloneTd.cloneNode( true ), this.childNodes[0] );
+                      // } );
+
+                      /*
+                       * Initialse DataTables, with no sorting on the 'details' column
+                       */
+                      var oTable = $('#hidden-table-info').dataTable( {
+                          "aoColumnDefs": [
+                              { "bSortable": false, "aTargets": [ 0 ] }
+                          ],
+                          "aaSorting": [[1, 'asc']]
+                      });
+
+                      /* Add event listener for opening and closing details
+                       * Note that the indicator for showing which row is open is not controlled by DataTables,
+                       * rather it is done here
+                       */
+                      $('#hidden-table-info tbody td img').live('click', function () {
+                          var nTr = $(this).parents('tr')[0];
+                          if ( oTable.fnIsOpen(nTr) )
+                          {
+                              /* This row is already open - close it */
+                              this.src = '<%= image_tag("/assets/details_open.png") %>';
+                              oTable.fnClose( nTr );
+                          }
+                          else
+                          {
+                              /* Open this row */
+                              this.src = '<%= image_tag("/assets/details_close.png") %>';
+                              oTable.fnOpen( nTr, fnFormatDetails(oTable, nTr), 'details' );
+                          }
+                      } );
+                  } );
+              // </script>

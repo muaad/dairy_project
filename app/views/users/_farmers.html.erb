@@ -1,0 +1,61 @@
+<section class="panel">
+<div class="row">
+  <header class="panel-heading">
+      <!-- Farmers
+      <button class="btn btn-success btn-sm pull-right" data-toggle="modal" data-target="#myModal">
+      Add Farmer
+    </button> -->
+  </header>
+</div>
+
+<div class="panel-body">
+    <div class="adv-table">
+        <table cellpadding="0" cellspacing="0" border="0" class="display table table-bordered" id="hidden-table-info">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Phone Number</th>
+                <th class="hidden-phone">Registration Number</th>
+                <th class="hidden-phone">Number of Litres Delivered</th>
+                <th class="hidden-phone">Amount Paid</th>
+                <th class="hidden-phone">Amount Owed</th>
+                <th class="hidden-phone"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <% if !@farmers.nil? %>
+                <% @farmers.each do |farmer| %>
+                    <tr class="gradeX">
+                        <td>
+                            <%= farmer.name %>
+                        </td>
+                        <td>
+                            <%= farmer.phone_number %>
+                        </td>
+                        <td class="hidden-phone">
+                            <%= farmer.registration_number %>
+                        </td>
+                        <td class="center hidden-phone">
+                            <%= farmer.litres_delivered %>
+                        </td>
+                        <td class="center hidden-phone">
+                            <%= farmer.total_payout %>
+                        </td>
+                        <td class="center hidden-phone">
+                            <%= farmer.amount_owed %>
+                        </td>
+                        <td>
+                            <%= link_to 'Edit', edit_farmer_path(farmer) %>
+                        </td>
+                    </tr>
+                <% end %>
+            <% end %>
+            
+            </tbody>
+        </table>
+
+    </div>
+</div>
+</section>
+<!-- page end-->
+
