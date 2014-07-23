@@ -20,6 +20,7 @@ gem "paperclip"
 gem 'acts_as_tenant'
 gem 'annotate'
 gem 'httparty'
+gem 'savon', '~> 1.2.0'
 # gem "chartkick"
 gem 'lazy_high_charts'
 gem "highcharts-rails", "~> 3.0.0"

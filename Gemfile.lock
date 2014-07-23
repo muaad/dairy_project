@@ -30,6 +30,9 @@ GEM
     acts_as_tenant (0.3.5)
       rails (>= 3.1)
       request_store (>= 1.0.5)
+    akami (1.2.2)
+      gyoku (>= 0.4.0)
+      nokogiri
     annotate (2.6.5)
       activerecord (>= 2.3.0)
       rake (>= 0.8.7)
@@ -72,6 +75,8 @@ GEM
       thor (~> 0.14)
     font-awesome-sass (4.1.0)
       sass (~> 3.2)
+    gyoku (0.4.6)
+      builder (>= 2.1.2)
     hash-deep-merge (0.1.1)
     high_voltage (2.2.0)
     highcharts-rails (3.0.10)
@@ -80,6 +85,8 @@ GEM
     httparty (0.13.0)
       json (~> 1.8)
       multi_xml (>= 0.5.2)
+    httpi (1.1.1)
+      rack
     hub (1.12.2)
     i18n (0.6.11)
     interception (0.5)
@@ -98,9 +105,13 @@ GEM
       treetop (~> 1.4.8)
     method_source (0.8.2)
     mime-types (1.25.1)
+    mini_portile (0.6.0)
     minitest (5.4.0)
     multi_json (1.10.1)
     multi_xml (0.5.5)
+    nokogiri (1.6.3.1)
+      mini_portile (= 0.6.0)
+    nori (1.1.5)
     orm_adapter (0.5.0)
     paperclip (3.5.2)
       activemodel (>= 3.0.0)
@@ -154,6 +165,14 @@ GEM
       sass (~> 3.2.0)
       sprockets (~> 2.8, <= 2.11.0)
       sprockets-rails (~> 2.0)
+    savon (1.2.0)
+      akami (~> 1.2.0)
+      builder (>= 2.1.2)
+      gyoku (~> 0.4.5)
+      httpi (~> 1.1.0)
+      nokogiri (>= 1.4.0)
+      nori (~> 1.1.0)
+      wasabi (~> 2.5.0)
     sdoc (0.4.0)
       json (~> 1.8)
       rdoc (~> 4.0, < 5.0)
@@ -184,6 +203,9 @@ GEM
       json (>= 1.8.0)
     warden (1.2.3)
       rack (>= 1.0)
+    wasabi (2.5.1)
+      httpi (~> 1.0)
+      nokogiri (>= 1.4.0)
 
 PLATFORMS
   ruby
@@ -215,6 +237,7 @@ DEPENDENCIES
   rails_12factor
   rails_layout
   sass-rails (~> 4.0.3)
+  savon (~> 1.2.0)
   sdoc (~> 0.4.0)
   spring
   sqlite3
