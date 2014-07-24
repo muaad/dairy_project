@@ -27,7 +27,11 @@
                 <li class="dropdown">
                     <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                       <% if user_signed_in? %>
-                        <%= image_tag current_user.profile_pic.url(:thumb), style: "width: 20px;" %>
+                        <% if current_user.profile_pic.exists? %>
+                          <%= image_tag current_user.profile_pic.url(:thumb), style: "width: 20px;" %>
+                        <% else %>
+                          <%= image_tag "/assets/avatar.png", style: "width: 20px;" %>
+                        <% end %>
                         <span class="username"><%= current_user.name %></span>
                         <b class="caret"></b>
                       <% else %>

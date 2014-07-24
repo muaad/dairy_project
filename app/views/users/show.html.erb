@@ -3,7 +3,11 @@
                       <section class="panel">
                           <div class="user-heading round">
                               <a href="#">
-                                  <%= image_tag @user.profile_pic.url %>
+                                  <% if current_user.profile_pic.exists? %>
+                                    <%= image_tag current_user.profile_pic.url %>
+                                  <% else %>
+                                    <%= image_tag "/assets/avatar.png" %>
+                                  <% end %>
                               </a>
                               <h1><%= @user.name %></h1>
                               <p><%= @user.email %></p>

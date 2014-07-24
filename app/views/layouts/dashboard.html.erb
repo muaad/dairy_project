@@ -197,7 +197,7 @@
                             <li>
                                 <p class="yellow">You have <%= Delivery.where(paid_for: false).count %> new notifications</p>
                             </li>
-                            <% Delivery.where(paid_for: false)[0..9].each do |d| %>
+                            <% Delivery.where(paid_for: false)[0..4].each do |d| %>
                             <li>
                                 <a href="<%= delivery_path(d) %>">
                                     <span class="label label-danger"><i class="fa fa-bolt"></i></span>
@@ -225,7 +225,11 @@
                     <!-- user login dropdown start-->
                     <li class="dropdown">
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                            <%= image_tag current_user.profile_pic.url(:thumb), style: "width: 20px;" %>
+                            <% if current_user.profile_pic.exists? %>
+                              <%= image_tag current_user.profile_pic.url(:thumb), style: "width: 20px;" %>
+                            <% else %>
+                              <%= image_tag "/assets/avatar.png", style: "width: 20px;" %>
+                            <% end %>
                             <span class="username"><%= current_user.name %></span>
                             <b class="caret"></b>
                         </a>
