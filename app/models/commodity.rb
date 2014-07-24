@@ -9,13 +9,14 @@
 #  created_at     :datetime
 #  updated_at     :datetime
 #  user_id        :integer
+#  account_id     :integer
 #
 
 class Commodity < ActiveRecord::Base
 	has_many :deliveries
 	has_many :prices
-	# belongs_to :account
-	# acts_as_tenant(:account)
+	belongs_to :account
+	acts_as_tenant(:account)
 
 	def latest_price
 		prices.last.price

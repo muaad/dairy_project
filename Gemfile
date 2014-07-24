@@ -17,6 +17,7 @@ gem 'devise_invitable'
 gem 'figaro', '>= 1.0.0.rc1'
 gem 'high_voltage'
 gem "paperclip"
+gem "paperclip-dropbox"
 gem 'acts_as_tenant'
 gem 'annotate'
 gem 'httparty'
@@ -24,6 +25,7 @@ gem 'savon', '~> 1.2.0'
 # gem "chartkick"
 gem 'lazy_high_charts'
 gem "highcharts-rails", "~> 3.0.0"
+gem 'geoip_rails'
 group :development do
   gem 'sqlite3'
   gem 'better_errors'

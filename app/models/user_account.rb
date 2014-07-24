@@ -1,15 +1,15 @@
 # == Schema Information
 #
-# Table name: accounts
+# Table name: user_accounts
 #
 #  id         :integer          not null, primary key
-#  email      :string(255)
 #  user_id    :integer
+#  account_id :integer
 #  created_at :datetime
 #  updated_at :datetime
 #
 
-class Account < ActiveRecord::Base
+class UserAccount < ActiveRecord::Base
   belongs_to :user
-  validates_uniqueness_of :email, scope: :account_id
+  belongs_to :account
 end

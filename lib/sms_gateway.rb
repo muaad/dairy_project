@@ -9,11 +9,18 @@ class SMSGateway
       # @split = false #ENV['SPLIT_SMS']
     end
 
+    def add_pluses msg
+      msg = msg.gsub(" ", "+")
+    end
+
     def send to, message
-      begin
-        puts HTTParty.get("#{@base_uri}?target=kenyaOrient&msisdn=#{to}&text=#{message}&login=#{@login}&pass=#{@password}")
-      rescue Exception => e
-        # puts e.backtrace
-      end
+      # body = {"target" => "kenyaOrient",
+      #         "msisdn" => to,
+      #         "text" => message,
+      #         "login" => @login,
+      #         "pass" => @password
+      #       }
+      # HTTParty.post(@base_uri, body)
+      HTTParty.get("#{@base_uri}?target=kenyaOrient&msisdn=#{to}&text=#{add_pluses(message)}&login=#{@login}&pass=#{@password}")
     end
 end

@@ -10,13 +10,14 @@
 #  created_at          :datetime
 #  updated_at          :datetime
 #  user_id             :integer
+#  account_id          :integer
 #
 
 class Farmer < ActiveRecord::Base
 	has_many :deliveries
 	belongs_to :user
-	# belongs_to :account
- #  	acts_as_tenant(:account)
+	belongs_to :account
+  	acts_as_tenant(:account)
 
 	def litres_delivered
 		total = 0

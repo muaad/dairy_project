@@ -8,10 +8,11 @@
 #  created_at   :datetime
 #  updated_at   :datetime
 #  user_id      :integer
+#  account_id   :integer
 #
 
 class Price < ActiveRecord::Base
   belongs_to :commodity
-  # belongs_to :account
-  # acts_as_tenant(:account)
+  belongs_to :account
+  acts_as_tenant(:account)
 end

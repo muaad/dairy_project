@@ -33,6 +33,7 @@
 #  profile_pic_file_size    :integer
 #  profile_pic_updated_at   :datetime
 #  is_admin                 :boolean
+#  account_id               :integer
 #
 
 class User < ActiveRecord::Base
@@ -40,16 +41,15 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
-  # belongs_to :account
-  # acts_as_tenant(:account)
-  # has_attached_file :profile_pic, :default_url => "/assets/eu.png"
-  if Rails.env.production?
-    has_attached_file :profile_pic,
-    :storage => :dropbox,
-    :dropbox_credentials => Rails.root.join("config/dropbox.yml")
-  else
+  has_many :user_accounts
+  has_many :accounts, through: :user_accounts
+  # if Rails.env.production?
+  #   has_attached_file :profile_pic,
+  #   :storage => :dropbox,
+  #   :dropbox_credentials => Rails.root.join("config/dropbox.yml")
+  # else
     has_attached_file :profile_pic, :styles => { :medium => "300x300>", :thumb => "10X10>" }, :default_url => "assets/avatar.png"
-  end
+  # end
   has_many :farmers
   has_many :deliveries
   has_many :commodities
