@@ -1,9 +1,10 @@
-<section id="wrapper">
-<section class="wrapper">
-<div class="authform">
-  <h3>Edit <%= resource_name.to_s.humanize %></h3>
-  <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :role => 'form'}) do |f| %>
+<div class="login-body">
+    <div class="container" style="margin-right: -15%;">
+      <div class="authform" style="margin-bottom: 5%; margin-right: -15%; margin-top: 3%;">
+  <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :role => 'form', class: "form-signin"}) do |f| %>
+  <h2 class="form-signin-heading">Edit Account</h2>
     <%= devise_error_messages! %>
+    <div class="login-wrap">
     <div class="form-group">
       <%= f.label :name %>
       <%= f.text_field :name, :autofocus => true, class: 'form-control' %>
@@ -44,7 +45,8 @@
 <div class="authform">
 <h3>Cancel Account</h3>
 <p>Unhappy? We'll be sad to see you go.</p>
-<%= button_to "Cancel my account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'button right' %>
+<%= button_to "Cancel my account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'btn btn-sm ' %>
 </div>
-</section>
-</section>
+</div>
+</div>
+</div>

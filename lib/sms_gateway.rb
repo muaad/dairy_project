@@ -21,6 +21,11 @@ class SMSGateway
       #         "pass" => @password
       #       }
       # HTTParty.post(@base_uri, body)
-      HTTParty.get("#{@base_uri}?target=kenyaOrient&msisdn=#{to}&text=#{add_pluses(message)}&login=#{@login}&pass=#{@password}")
+      begin
+        response = HTTParty.get("#{@base_uri}?target=kenyaOrient&msisdn=#{to}&text=#{add_pluses(message)}&login=#{@login}&pass=#{@password}")
+        puts ">>>>>> #{response}"
+      rescue Exception => e
+        puts e.backtrace
+      end
     end
 end

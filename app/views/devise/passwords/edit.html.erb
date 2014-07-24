@@ -1,14 +1,20 @@
-<div class="authform">
-  <%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :put }) do |f| %>
-    <h3>Change your password</h3>
+<div class="login-body">
+    <div class="container" style="margin-right: -15%;">
+      <div class="authform" style="margin-bottom: 5%; margin-right: -15%; margin-top: 3%;">
+  <%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :put, class: "form-signin" }) do |f| %>
+    <h2 class="form-signin-heading">Change your password</h2>
     <%= devise_error_messages! %>
     <%= f.hidden_field :reset_password_token %>
+    <div class="login-wrap">
     <div class="form-group">
       <%= f.label :password, 'New password' %>
         <%= f.password_field :password, autofocus: true, autocomplete: 'off', class: 'form-control' %>
       <%= f.label :password_confirmation, 'Confirm new password' %>
         <%= f.password_field :password_confirmation, autocomplete: 'off', class: 'form-control' %>
     </div>
-     <%= f.submit 'Change my Password', :class => 'button right' %>
+     <%= f.submit 'Change my Password', :class => 'btn btn-lg btn-login btn-block' %>
+     </div>
   <% end %>
+</div>
+</div>
 </div>

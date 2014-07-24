@@ -16,7 +16,7 @@
       </div>
     <% end -%>
     <%= f.submit 'Sign in', :class => 'btn btn-lg btn-login btn-block' %>
-    <a data-toggle="modal" href="#myModal"> Forgot Password?</a>
+    <%= link_to "Forgot Password?", new_user_password_path %>
   </div>
   <div class="registration">
       Don't have an account yet?
