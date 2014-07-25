@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   resources :farmers
 
   root to: 'home#index'
-  devise_for :users
+  devise_for :users, :controllers => {:registrations => "users/registrations"}
   resources :users
 
   get "dashboard/index"
@@ -22,4 +22,6 @@ Rails.application.routes.draw do
   get "dashboard/notifications"
 
   match "delivery/:id/pay" => "deliveries#make_payment", :as => "pay_delivery", via: [:post]
+
+  post "/users/add_user" => "users#create", :as => "add_user"
 end

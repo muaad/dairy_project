@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140723190959) do
+ActiveRecord::Schema.define(version: 20140724101531) do
 
   create_table "accounts", force: true do |t|
     t.string   "email"
@@ -34,6 +34,22 @@ ActiveRecord::Schema.define(version: 20140723190959) do
 
   add_index "commodities", ["account_id"], name: "index_commodities_on_account_id"
   add_index "commodities", ["user_id"], name: "index_commodities_on_user_id"
+
+  create_table "delayed_jobs", force: true do |t|
+    t.integer  "priority",   default: 0, null: false
+    t.integer  "attempts",   default: 0, null: false
+    t.text     "handler",                null: false
+    t.text     "last_error"
+    t.datetime "run_at"
+    t.datetime "locked_at"
+    t.datetime "failed_at"
+    t.string   "locked_by"
+    t.string   "queue"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority"
 
   create_table "deliveries", force: true do |t|
     t.integer  "commodity_id"
@@ -75,8 +91,10 @@ ActiveRecord::Schema.define(version: 20140723190959) do
     t.string   "transaction_number"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "account_id"
   end
 
+  add_index "payments", ["account_id"], name: "index_payments_on_account_id"
   add_index "payments", ["delivery_id"], name: "index_payments_on_delivery_id"
   add_index "payments", ["farmer_id"], name: "index_payments_on_farmer_id"
   add_index "payments", ["user_id"], name: "index_payments_on_user_id"

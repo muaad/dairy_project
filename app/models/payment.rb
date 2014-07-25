@@ -10,6 +10,7 @@
 #  transaction_number :string(255)
 #  created_at         :datetime
 #  updated_at         :datetime
+#  account_id         :integer
 #
 
 class Payment < ActiveRecord::Base

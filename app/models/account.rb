@@ -10,6 +10,6 @@
 #
 
 class Account < ActiveRecord::Base
-  belongs_to :user
-  validates_uniqueness_of :email, scope: :account_id
+  has_many :users
+  # validates_uniqueness_of :email, scope: :account_id
 end

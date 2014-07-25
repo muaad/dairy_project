@@ -12,9 +12,12 @@
                               <h1><%= @user.name %></h1>
                               <p><%= @user.email %></p>
                           </div>
-
                           <ul class="nav nav-pills nav-stacked">
+                          <% if @user == current_user %>    
                               <li><a href="<%= edit_user_registration_path %>"> <i class="fa fa-edit"></i> Edit profile</a></li>
+                          <% else %>
+                              <li><a href="<%= edit_user_registration_path %>"> <i class="fa fa-edit"></i> Edit User</a></li>
+                          <% end %>
                           </ul>
 
                       </section>

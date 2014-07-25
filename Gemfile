@@ -21,11 +21,13 @@ gem "paperclip-dropbox"
 gem 'acts_as_tenant'
 gem 'annotate'
 gem 'httparty'
-gem 'savon', '~> 1.2.0'
-# gem "chartkick"
-gem 'lazy_high_charts'
-gem "highcharts-rails", "~> 3.0.0"
-gem 'geoip_rails'
+# gem 'savon', '~> 1.2.0'
+gem 'savon', '~> 2.3.0'
+gem "chartkick"
+gem 'groupdate'
+# gem 'lazy_high_charts'
+# gem "highcharts-rails", "~> 3.0.0"
+gem 'delayed_job_active_record'
 group :development do
   gem 'sqlite3'
   gem 'better_errors'

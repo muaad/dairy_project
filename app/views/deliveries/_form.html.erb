@@ -28,10 +28,7 @@
         <%= f.label :quantity %><br>
         <%= f.number_field :quantity, class: "form-control" %>
       </div>
-      <div class="field">
-        <%= f.label :price %><br>
-        <%= f.text_field :price, value: Commodity.first.latest_price, class: "form-control disabled" %>
-      </div>
+      
       <br>
     <div class="actions pull-right">
       <% if current_user.is_admin %>

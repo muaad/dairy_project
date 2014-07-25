@@ -5,35 +5,22 @@ class ApplicationController < ActionController::Base
   before_filter :configure_permitted_parameters, if: :devise_controller?
   helper_method :resource_name, :resource, :devise_mapping, :deliveries_per_month
 
-  # set_current_tenant_through_filter
-	# before_filter :filter_tenant_via_devise_or_params
+  set_current_tenant_through_filter
+	before_filter :set_tennant
 
-	# def filter_tenant_via_devise_or_params
-	#   if user_signed_in?
-	#     account = current_user.main_account
-	#     set_current_tenant(account)
-	#   elsif params[:account].present?
-	#     account = Account.find_by_email(params[:account])
-	#     set_current_tenant(account)
-	#   elsif params[:token].present?
-	#     # possibly an API client
-	#     account = Account.find_by_auth_token(params[:token])
-	#     set_current_tenant(account)
-	#   else
-	#     # token authentication via API
-	#     authenticate_with_http_token do |token|        
-	#       account = Account.find_by_auth_token(token)
-	#       set_current_tenant(account)
-	#     end
-	#   end
-	# end
+	def set_tennant
+	  if user_signed_in?
+	    account = current_user.accounts.first
+	    set_current_tenant(account)
+	  end
+	end
 
   def after_sign_in_path_for(res)
     dashboard_index_path
   end
 
   def after_sign_out_path_for(arg)
-    root_path
+    new_user_session_path
   end
 
   def after_sign_up_path_for(resource)
@@ -80,4 +67,9 @@ class ApplicationController < ActionController::Base
 	    cs = [*'0'..'9', *'a'..'z', *'A'..'Z']-['O']-['I']-['1']-['0']-['i']-['o']
 		6.times.map { cs.sample }.join.upcase
 	end
+
+  def generate_random_password
+    cs = [*'0'..'9', *'a'..'z', *'a'..'z']-['O']-['I']-['1']-['0']-['i']-['o']
+    8.times.map { cs.sample }.join.upcase
+  end
 end

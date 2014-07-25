@@ -5,15 +5,15 @@ class PaymentService
     @gateway_url = ENV['PAYMENT_GATEWAY_URL']
     @username = ENV['PAYMENT_GATEWAY_USER']
     @pass = ENV['PAYMENT_GATEWAY_PASSWORD']
-    client = Savon::Client.new(@gateway_url)
+    @client = Savon.client(wsdl: @gateway_url)
     # client.wsdl.soap_actions
   end
 
   def prepare_payment trace, amount, number
     amount_to_s = sprintf('%.2f', amount)
     @pass = Digest::MD5.hexdigest(@username + trace + amount_to_s + @pass)
-    response = client.request :prepare_payment, body: { "username" => @username,
-    "pass", => @pass, "trace" => trace, "amount" => amount, "phone" => number }
+    response = @client.call :prepare_payment, message: { "username" => @username,
+    "pass" => @pass, "trace" => trace, "amount" => amount, "phone" => number }
 #      xml = '<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">
 # <s:Body>
 # <PreparePayment xmlns="http://www.jambopay.com/bulkpayservice/">
@@ -44,7 +44,7 @@ class PaymentService
   def create_payment transaction_id, approval_code
     @pass = Digest::MD5.hexdigest(@username + transaction_id + ap + @pass)
     client.request :prepare_payment, body: { "username" => @username,
-    "pass", => @pass, "transaction_id" => transaction_id, "approval_code" => approval_code }
+    "pass" => @pass, "transaction_id" => transaction_id, "approval_code" => approval_code }
 #      xml = '<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">
 # <s:Body>
 # <CreatePayment xmlns="http://www.jambopay.com/bulkpayservice/">
@@ -58,5 +58,23 @@ class PaymentService
 
 # '
 #       xml
+  end
+
+  def check_balance
+    response = @client.call :get_account_balance, message: { "username" => @username,
+    "pass" => @pass }
+#     '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:bul="http://www.jambopay.com/bulkpayservice/">
+#    <soapenv:Header/>
+#    <soapenv:Body>
+#       <bul:GetAccountBalance>
+#          <!--Optional:-->
+#          <bul:username>?</bul:username>
+#          <!--Optional:-->
+#          <bul:timestamp>?</bul:timestamp>
+#          <!--Optional:-->
+#          <bul:pass>?</bul:pass>
+#       </bul:GetAccountBalance>
+#    </soapenv:Body>
+# </soapenv:Envelope>'
   end
 end

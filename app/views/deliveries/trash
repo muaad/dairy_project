@@ -1,0 +1,4 @@
+<div class="field">
+        <%= f.label :price %><br>
+        <%= f.text_field :price, value: Commodity.first.latest_price, class: "form-control disabled" %>
+      </div>

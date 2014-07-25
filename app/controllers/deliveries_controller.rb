@@ -37,7 +37,7 @@ class DeliveriesController < ApplicationController
 
     respond_to do |format|
       if @delivery.save
-        gateway.send(@delivery.farmer.phone_number, "Hi, #{@delivery.delivered_by}. We have taken note of your delivery of #{@delivery.quantity} litres of milk and you will be dully compensated. Thanks.")
+        # gateway.send(@delivery.farmer.phone_number, "Hi, #{@delivery.delivered_by}. We have taken note of your delivery of #{@delivery.quantity} litres of milk and you will be dully compensated. Thanks.")
         if @delivery.paid_for
           Payment.create! amount: @delivery.total, delivery_id: @delivery.id, farmer_id: @delivery.farmer_id, user_id: current_user.id
         end
@@ -81,7 +81,7 @@ class DeliveriesController < ApplicationController
       @delivery.paid_for = true
       @delivery.save!
       Payment.create! amount: @delivery.total, delivery_id: @delivery.id, farmer_id: @delivery.farmer_id, user_id: current_user.id
-      gateway.send(@delivery.farmer.phone_number, "Hi, #{@delivery.delivered_by}. We have sent you KES #{@delivery.total} for your delivery of #{@delivery.quantity} litres of milk. Thanks.")
+      # gateway.send(@delivery.farmer.phone_number, "Hi, #{@delivery.delivered_by}. We have sent you KES #{@delivery.total} for your delivery of #{@delivery.quantity} litres of milk. Thanks.")
       redirect_to @delivery, notice: "Payment has been made!"
     else
       redirect_to @delivery, alert: "You are not authorized to make payments!"
