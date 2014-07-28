@@ -21,8 +21,8 @@ gem "paperclip-dropbox"
 gem 'acts_as_tenant'
 gem 'annotate'
 gem 'httparty'
-# gem 'savon', '~> 1.2.0'
-gem 'savon', '~> 2.3.0'
+gem 'savon', '~> 1.2.0'
+# gem 'savon', '~> 2.3.0'
 gem "chartkick"
 gem 'groupdate'
 # gem 'lazy_high_charts'
