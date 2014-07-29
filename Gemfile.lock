@@ -83,6 +83,7 @@ GEM
       thor (~> 0.14)
     font-awesome-sass (4.1.0)
       sass (~> 3.2)
+    friendly_id (4.0.9)
     groupdate (2.2.1)
       activesupport (>= 3)
     gyoku (0.4.6)
@@ -230,6 +231,7 @@ DEPENDENCIES
   devise_invitable
   figaro (>= 1.0.0.rc1)
   font-awesome-sass
+  friendly_id
   groupdate
   high_voltage
   httparty

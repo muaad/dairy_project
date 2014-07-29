@@ -11,6 +11,7 @@
 #  updated_at          :datetime
 #  user_id             :integer
 #  account_id          :integer
+#  slug                :string(255)
 #
 
 require 'test_helper'

@@ -11,9 +11,12 @@
 #  updated_at          :datetime
 #  user_id             :integer
 #  account_id          :integer
+#  slug                :string(255)
 #
 
 class Farmer < ActiveRecord::Base
+	# extend FriendlyId
+	# friendly_id :name, use: [:slugged, :history]
 	has_many :deliveries
 	belongs_to :user
 	belongs_to :account

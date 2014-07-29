@@ -43,7 +43,7 @@ class DeliveriesController < ApplicationController
           # Payment.create! amount: @delivery.total, delivery_id: @delivery.id, farmer_id: @delivery.farmer_id, user_id: current_user.id
           pay(@delivery)
         end
-        format.html { redirect_to @delivery, notice: 'Delivery was successfully created.' }
+        format.html { redirect_to deliveries_path, notice: 'Delivery was successfully created.' }
         format.json { render :show, status: :created, location: @delivery }
       else
         format.html { render :new }

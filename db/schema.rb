@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140729175918) do
+ActiveRecord::Schema.define(version: 20140729204819) do
 
   create_table "accounts", force: true do |t|
     t.string   "email"
@@ -86,9 +86,11 @@ ActiveRecord::Schema.define(version: 20140729175918) do
     t.datetime "updated_at"
     t.integer  "user_id"
     t.integer  "account_id"
+    t.string   "slug"
   end
 
   add_index "farmers", ["account_id"], name: "index_farmers_on_account_id"
+  add_index "farmers", ["slug"], name: "index_farmers_on_slug", unique: true
   add_index "farmers", ["user_id"], name: "index_farmers_on_user_id"
 
   create_table "payments", force: true do |t|

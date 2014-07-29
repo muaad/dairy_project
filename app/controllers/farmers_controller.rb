@@ -33,7 +33,7 @@ class FarmersController < ApplicationController
 
     respond_to do |format|
       if @farmer.save
-        format.html { redirect_to @farmer, notice: 'Farmer was successfully created.' }
+        format.html { redirect_to farmers_path, notice: 'Farmer was successfully created.' }
         format.json { render :show, status: :created, location: @farmer }
       else
         format.html { render :new }

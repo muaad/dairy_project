@@ -28,6 +28,7 @@ gem 'groupdate'
 # gem 'lazy_high_charts'
 # gem "highcharts-rails", "~> 3.0.0"
 gem 'delayed_job_active_record'
+gem 'friendly_id'
 group :development do
   gem 'sqlite3'
   gem 'better_errors'
