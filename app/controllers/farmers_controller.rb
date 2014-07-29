@@ -59,11 +59,11 @@ class FarmersController < ApplicationController
   # DELETE /farmers/1
   # DELETE /farmers/1.json
   def destroy
-    @farmer.destroy
-    respond_to do |format|
-      format.html { redirect_to farmers_url, notice: 'Farmer was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    # @farmer.destroy
+    # respond_to do |format|
+    #   format.html { redirect_to farmers_url, notice: 'Farmer was successfully destroyed.' }
+    #   format.json { head :no_content }
+    # end
   end
 
   private

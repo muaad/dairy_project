@@ -38,3 +38,14 @@
 //= require jquery.themepunch.plugins.min
 //= require jquery.themepunch.revolution.min
 //= require revulation-slide
+
+// $("input").keypress(function(event) {
+//     if (event.which == 13) {
+//         event.preventDefault();
+//         $("form").submit();
+//     }
+// });
+
+// $("#edit-link").click(function() {
+//     $(this).modal();
+// });

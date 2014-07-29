@@ -1,43 +1,47 @@
 <!-- page start-->
 <section class="panel">
-<div class="row">
-    <header class="panel-heading">
-        <%= link_to "Pay All", "#", class: "pull-right btn-sm btn-success" %>
-    </header>
-</div>
+<% if !@deliveries.nil? %>
+  <div class="row">
+      <header class="panel-heading">
+        <% if current_user.is_admin %>
+          <%= link_to "Pay All", bulk_payment_path, method: :post, data: { confirm: 'Are you sure?' }, class: "btn-success btn-sm pull-right text-decoration: none;" %>
+        <% end %>
+      </header>
+  </div>
 
-<div class="panel-body">
-      <div class="adv-table">
-          <table cellpadding="0" cellspacing="0" border="0" class="display table table-bordered" id="hidden-table-info" class="display table table-bordered table-striped">
-              <thead>
-              <tr>
-                  <th>Farmer</th>
-                  <th>Delivery</th>
-                  <th class="hidden-phone">Amount</th>
-              </tr>
-              </thead>
-              <tbody>
-              <% if !@deliveries.nil? %>
-                  <% @deliveries.each do |delivery| %>
-                      <tr class="gradeX">
-                          <td>
-                              <%= link_to delivery.delivered_by, farmer_path(delivery.farmer) %>
-                          </td>
-                          <td>
-                              <%= link_to delivery.description, delivery_path(delivery) %>
-                          </td>
-                          <td class="hidden-phone">
-                              <%= delivery.total %>
-                          </td>
-                      </tr>
-                  <% end %>
-              <% end %>
-              
-              </tbody>
-          </table>
+  <div class="panel-body">
+        <div class="adv-table">
+            <table cellpadding="0" cellspacing="0" border="0" class="display table table-bordered" id="hidden-table-info" class="display table table-bordered table-striped">
+                <thead>
+                <tr>
+                    <th>Farmer</th>
+                    <th>Delivery</th>
+                    <th class="hidden-phone">Amount</th>
+                </tr>
+                </thead>
+                <tbody>
+                <% if !@deliveries.nil? %>
+                    <% @deliveries.each do |delivery| %>
+                        <tr class="gradeX">
+                            <td>
+                                <%= link_to delivery.delivered_by, farmer_path(delivery.farmer) %>
+                            </td>
+                            <td>
+                                <%= link_to delivery.description, delivery_path(delivery) %>
+                            </td>
+                            <td class="hidden-phone">
+                                <%= delivery.total %>
+                            </td>
+                        </tr>
+                    <% end %>
+                <% end %>
+                
+                </tbody>
+            </table>
 
-      </div>
-</div>
+        </div>
+  </div>
+<% end %>
 </section>
 <!-- page end-->
 

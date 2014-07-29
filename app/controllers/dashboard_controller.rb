@@ -2,6 +2,7 @@ class DashboardController < ApplicationController
   layout "dashboard"
   before_filter :authenticate_user!
   def index
+    @account = current_user.accounts.first
   end
 
   def farmers
@@ -33,6 +34,9 @@ class DashboardController < ApplicationController
   end
 
   def users
+  end
+
+  def account
   end
 
   def notifications

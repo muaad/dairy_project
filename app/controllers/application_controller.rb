@@ -72,4 +72,16 @@ class ApplicationController < ActionController::Base
     cs = [*'0'..'9', *'a'..'z', *'a'..'z']-['O']-['I']-['1']-['0']-['i']-['o']
     8.times.map { cs.sample }.join.upcase
   end
+
+  def add_user_to_account
+    UserAccount.create! user_id: @user.id, account_id: current_user.accounts.first.id
+  end
+
+  def pay delivery
+    gateway = SMSGateway.new
+    delivery.paid_for = true
+    delivery.save!
+    Payment.create! amount: delivery.total, delivery_id: delivery.id, farmer_id: delivery.farmer_id, user_id: current_user.id
+    gateway.send(delivery.farmer.phone_number, "Hi, #{delivery.delivered_by}. We have sent you KES #{delivery.total} for your delivery of #{delivery.quantity} litres of milk. Thanks.")
+  end
 end

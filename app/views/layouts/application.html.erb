@@ -5,6 +5,7 @@
     <title><%= content_for?(:title) ? yield(:title) : "Maziwa Pay" %></title>
     <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Maziwa Pay" %>">    
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="shortcut icon" href="/assets/cow.png">
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => false %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => false %>
     <%= csrf_meta_tags %>
@@ -12,7 +13,8 @@
   <body style="background: #f1f2f7;">
     <header class="header white-bg">
           <div class="sidebar-toggle-box">
-              <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
+              <!-- <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div> -->
+              <img src="/assets/cow.png" width="20px">
           </div>
         <!--logo start-->
         <a href="/" class="logo">Maziwa<span>Pay</span></a>

@@ -34,12 +34,14 @@ class DeliveriesController < ApplicationController
     @delivery.price = Commodity.find(@delivery.commodity_id).latest_price
     @delivery.total = delivery_params[:quantity].to_i * @delivery.price
     @delivery.user_id = current_user.id
+    @delivery.paid_for = delivery_params[:paid_for] == "1"
 
     respond_to do |format|
       if @delivery.save
-        # gateway.send(@delivery.farmer.phone_number, "Hi, #{@delivery.delivered_by}. We have taken note of your delivery of #{@delivery.quantity} litres of milk and you will be dully compensated. Thanks.")
+        gateway.send(@delivery.farmer.phone_number, "Hi, #{@delivery.delivered_by}. We have taken note of your delivery of #{@delivery.quantity} litres of milk and you will be dully compensated. Thanks.")
         if @delivery.paid_for
-          Payment.create! amount: @delivery.total, delivery_id: @delivery.id, farmer_id: @delivery.farmer_id, user_id: current_user.id
+          # Payment.create! amount: @delivery.total, delivery_id: @delivery.id, farmer_id: @delivery.farmer_id, user_id: current_user.id
+          pay(@delivery)
         end
         format.html { redirect_to @delivery, notice: 'Delivery was successfully created.' }
         format.json { render :show, status: :created, location: @delivery }
@@ -54,6 +56,11 @@ class DeliveriesController < ApplicationController
   # PATCH/PUT /deliveries/1.json
   def update
     respond_to do |format|
+      # if @delivery.paid_for != (delivery_params[:paid_for] == "1")
+        if !@delivery.paid_for && delivery_params[:paid_for] == "1"
+          pay(@delivery)
+        end
+      # end
       if @delivery.update(delivery_params)
         format.html { redirect_to @delivery, notice: 'Delivery was successfully updated.' }
         format.json { render :show, status: :ok, location: @delivery }
@@ -75,16 +82,23 @@ class DeliveriesController < ApplicationController
   end
 
   def make_payment
-    gateway = SMSGateway.new
-    @delivery = Delivery.find(params[:id])
     if current_user.is_admin
-      @delivery.paid_for = true
-      @delivery.save!
-      Payment.create! amount: @delivery.total, delivery_id: @delivery.id, farmer_id: @delivery.farmer_id, user_id: current_user.id
-      # gateway.send(@delivery.farmer.phone_number, "Hi, #{@delivery.delivered_by}. We have sent you KES #{@delivery.total} for your delivery of #{@delivery.quantity} litres of milk. Thanks.")
+      @delivery = Delivery.find(params[:id])
+      pay(@delivery)
       redirect_to @delivery, notice: "Payment has been made!"
     else
       redirect_to @delivery, alert: "You are not authorized to make payments!"
+    end
+  end
+
+  def bulk_payment
+    if current_user.is_admin
+      Delivery.where(:paid_for => false).each do |delivery|
+        pay(delivery)
+      end
+      redirect_to payments_path, notice: "Payments have been made!"
+    else
+      redirect_to delivery, alert: "You are not authorized to make payments!"
     end
   end
 

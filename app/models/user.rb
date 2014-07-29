@@ -39,19 +39,18 @@
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  # after_create :make_admin
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
   has_many :user_accounts
   has_many :accounts, through: :user_accounts
-  belongs_to :account
-  acts_as_tenant(:account)
+  # belongs_to :account
+  # acts_as_tenant(:account)
   # if Rails.env.production?
   #   has_attached_file :profile_pic,
   #   :storage => :dropbox,
   #   :dropbox_credentials => Rails.root.join("config/dropbox.yml")
   # else
-    has_attached_file :profile_pic, :styles => { :medium => "300x300>", :thumb => "10X10>" }, :default_url => "assets/avatar.png"
+  has_attached_file :profile_pic, :styles => { :medium => "300x300>", :thumb => "10X10>" }, :default_url => "assets/avatar.png"
   # end
   has_many :farmers
   has_many :deliveries
@@ -85,12 +84,4 @@ class User < ActiveRecord::Base
     end
     activities
   end
-
-  # def make_admin
-  #   account = Account.find_or_create_by! email: self.email
-  #   self.is_admin = true
-  #   # self.account_id = account.id
-  #   self.save!
-  #   UserAccount.create! user_id: self.id, account_id: account.id
-  # end
 end

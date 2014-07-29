@@ -31,7 +31,7 @@
       
       <br>
     <div class="actions pull-right">
-      <% if current_user.is_admin %>
+      <% if current_user.is_admin && !@delivery.paid_for %>
         <%= f.check_box :paid_for %>
         <%= f.label :paid_for, "Pay for delivery" %>
       <% end %>
