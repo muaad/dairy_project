@@ -80,6 +80,10 @@ class PaymentService
   def check_balance
     # response = @client.call :get_account_balance, message: { "username" => @username,
     # "pass" => @pass }
+    timestamp = Time.now.to_i
+    # Base64.encode64(Digest::SHA1.digest(original)[0,20])
+    pass = Digest::SHA1.hexdigest(@username + "#{timestamp}" + @pass)
+    # pass = Base64.encode64(pass)
     xml = "<soapenv:Envelope xmlns:soapenv='http://schemas.xmlsoap.org/soap/envelope/' xmlns:bul='http://www.jambopay.com/bulkpayservice/'>
      <soapenv:Header/>
      <soapenv:Body>
@@ -87,9 +91,9 @@ class PaymentService
            <!--Optional:-->
            <bul:username>#{@username}</bul:username>
            <!--Optional:-->
-           <bul:timestamp>#{Time.now.to_i}</bul:timestamp>
+           <bul:timestamp>#{timestamp}</bul:timestamp>
            <!--Optional:-->
-           <bul:pass>#{@pass}</bul:pass>
+           <bul:pass>#{pass}</bul:pass>
         </bul:GetAccountBalance>
      </soapenv:Body>
   </soapenv:Envelope>"

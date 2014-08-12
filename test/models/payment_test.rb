@@ -11,6 +11,8 @@
 #  created_at         :datetime
 #  updated_at         :datetime
 #  account_id         :integer
+#  trace              :string(255)
+#  status             :string(255)
 #
 
 require 'test_helper'
