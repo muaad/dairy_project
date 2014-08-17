@@ -23,7 +23,7 @@ class SMSGateway
       # HTTParty.post(@base_uri, body)
       password = Digest::MD5.hexdigest(to + @password)
       begin
-        response = HTTParty.get("#{@base_uri}?target=kenyaOrient&msisdn=#{to}&text=#{add_pluses(message)}&login=#{@login}&pass=#{password}")
+        response = HTTParty.get("#{@base_uri}?target=info&msisdn=#{to}&text=#{add_pluses(message)}&login=#{@login}&pass=#{password}")
         puts ">>>>>> #{response}"
       rescue Exception => e
         puts e.backtrace

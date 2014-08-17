@@ -1,3 +1,4 @@
+require "payment_service"
 class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
@@ -73,15 +74,26 @@ class ApplicationController < ActionController::Base
     8.times.map { cs.sample }.join.upcase
   end
 
+  def generate_random_trace
+    cs = [*'0'..'9', *'a'..'z', *'a'..'z']-['O']-['I']-['1']-['0']-['i']-['o']
+    5.times.map { cs.sample }.join.downcase
+  end
+
   def add_user_to_account
     UserAccount.create! user_id: @user.id, account_id: current_user.accounts.first.id
   end
 
   def pay delivery
     gateway = SMSGateway.new
+    payment = PaymentService.new
+    trace = generate_random_trace
     delivery.paid_for = true
     delivery.save!
-    Payment.create! amount: delivery.total, delivery_id: delivery.id, farmer_id: delivery.farmer_id, user_id: current_user.id
+    response = payment.prepare_payment trace, delivery.total, delivery.farmer.phone_number
+    transaction_code = response.to_array[0][:prepare_payment_response][:prepare_payment_result][:transaction_id]
+    
+    p = Payment.create! amount: delivery.total, delivery_id: delivery.id, farmer_id: delivery.farmer_id, user_id: current_user.id, transaction_number: transaction_code, trace: trace
     gateway.send(delivery.farmer.phone_number, "Hi, #{delivery.delivered_by}. We have sent you KES #{delivery.total} for your delivery of #{delivery.quantity} litres of milk. Thanks.")
+    p
   end
 end

@@ -40,8 +40,7 @@ class DeliveriesController < ApplicationController
       if @delivery.save
         gateway.send(@delivery.farmer.phone_number, "Hi, #{@delivery.delivered_by}. We have taken note of your delivery of #{@delivery.quantity} litres of milk and you will be dully compensated. Thanks.")
         if @delivery.paid_for
-          # Payment.create! amount: @delivery.total, delivery_id: @delivery.id, farmer_id: @delivery.farmer_id, user_id: current_user.id
-          pay(@delivery)
+          create_payment(@delivery)
         end
         format.html { redirect_to deliveries_path, notice: 'Delivery was successfully created.' }
         format.json { render :show, status: :created, location: @delivery }
@@ -52,13 +51,22 @@ class DeliveriesController < ApplicationController
     end
   end
 
+  def create_payment delivery
+    payment = PaymentService.new
+    p = pay(delivery)
+    response = payment.create_payment p.transaction_number, "0"
+    status = response.to_array[0][:create_payment_response][:create_payment_result][:result][:result_text]
+    p.status = status
+    p.save!
+  end
+
   # PATCH/PUT /deliveries/1
   # PATCH/PUT /deliveries/1.json
   def update
     respond_to do |format|
       # if @delivery.paid_for != (delivery_params[:paid_for] == "1")
         if !@delivery.paid_for && delivery_params[:paid_for] == "1"
-          pay(@delivery)
+          create_payment(@delivery)
         end
       # end
       if @delivery.update(delivery_params)
@@ -83,8 +91,7 @@ class DeliveriesController < ApplicationController
 
   def make_payment
     if current_user.is_admin
-      @delivery = Delivery.find(params[:id])
-      pay(@delivery)
+      create_payment(@delivery)
       redirect_to @delivery, notice: "Payment has been made!"
     else
       redirect_to @delivery, alert: "You are not authorized to make payments!"
@@ -94,7 +101,7 @@ class DeliveriesController < ApplicationController
   def bulk_payment
     if current_user.is_admin
       Delivery.where(:paid_for => false).each do |delivery|
-        pay(delivery)
+        create_payment(delivery)
       end
       redirect_to payments_path, notice: "Payments have been made!"
     else

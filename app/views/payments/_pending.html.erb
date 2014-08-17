@@ -3,7 +3,7 @@
 <% if !@deliveries.nil? %>
   <div class="row">
       <header class="panel-heading">
-        <% if current_user.is_admin %>
+        <% if current_user.is_admin && Delivery.where(:paid_for => false).count > 0 %>
           <%= link_to "Pay All", bulk_payment_path, method: :post, data: { confirm: 'Are you sure?' }, class: "btn-success btn-sm pull-right text-decoration: none;" %>
         <% end %>
       </header>

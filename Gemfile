@@ -29,6 +29,7 @@ gem 'groupdate'
 # gem "highcharts-rails", "~> 3.0.0"
 gem 'delayed_job_active_record'
 gem 'friendly_id'
+gem 'phony_rails'
 group :development do
   gem 'sqlite3'
   gem 'better_errors'
@@ -47,3 +48,4 @@ group :production do
 	# gem 'pg'
   gem 'mysql2', '0.3.15'
 end
+gem 'countries'
